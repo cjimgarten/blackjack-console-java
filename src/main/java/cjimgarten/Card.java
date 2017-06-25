@@ -81,6 +81,15 @@ public class Card {
         return this.faceUp;
     }
 
+    // flip the card
+    public  void flip() {
+        if (this.faceUp) {
+            this.faceUp = false;
+        } else {
+            this.faceUp = true;
+        }
+    }
+
     // swap the value of an Ace
     public void swapAceValue() {
 

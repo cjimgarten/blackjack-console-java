@@ -1,4 +1,4 @@
-package cjimgarten;
+package com.cjimgarten.blackjack;
 
 import java.util.Scanner;
 

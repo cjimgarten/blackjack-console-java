@@ -1,4 +1,4 @@
-package cjimgarten;
+package com.cjimgarten.blackjack;
 
 /**
  * Created by chris on 6/21/17.

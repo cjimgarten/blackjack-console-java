@@ -44,7 +44,7 @@ public class Card {
     public static final int ONE_VAL = 1;
 
     // fields
-    private String rank, suit;
+    private final String rank, suit;
     private int value;
     private boolean faceUp;
 
@@ -64,7 +64,7 @@ public class Card {
         this.faceUp = faceUp;
     }
 
-    // get methods
+    // getters and setters
     public String getRank() {
         return this.rank;
     }
@@ -77,8 +77,16 @@ public class Card {
         return this.value;
     }
 
+    public void setValue(int value) {
+        this.value = value;
+    }
+
     public boolean isFaceUp() {
         return this.faceUp;
+    }
+
+    public void setFaceUp(boolean faceUp) {
+        this.faceUp = faceUp;
     }
 
     // flip the card
@@ -107,18 +115,9 @@ public class Card {
     }
 
     // to string method
+    @Override
     public String toString() {
         return "rank: " + this.rank + ", suit: " + this.suit + ", value: " + this.value + ", " +
                 "faceUp: " + this.faceUp;
-    }
-
-    // main method
-    public static void main(String[] args) {
-        Card myCard = new Card();
-        System.out.println(myCard);
-        System.out.println(myCard.getRank());
-        System.out.println(myCard.getSuit());
-        System.out.println(myCard.getValue());
-        System.out.println(myCard.isFaceUp());
     }
 }

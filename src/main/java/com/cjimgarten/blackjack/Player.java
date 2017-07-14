@@ -14,7 +14,7 @@ public class Player extends ArrayList<Card> {
     // fields
     private int handValue;
 
-    // constructors
+    // constructor
     public Player() {
         this.handValue = 0;
     }
@@ -26,18 +26,19 @@ public class Player extends ArrayList<Card> {
 
     // add a card to the hand
     public void addCard(Card c, boolean faceUp) {
-        if (!c.isFaceUp() && faceUp) {
-            c.flip();
-        } else if (c.isFaceUp() && !faceUp) {
-            c.flip();
-        }
+        c.setFaceUp(faceUp);
         this.add(c);
         this.updateHandValue();
     }
 
     // flip a card in the hand
-    public void flip(int index) {
-        this.get(index).flip();
+    public void flipCard(int index) {
+        Card c = this.get(index);
+        if (c.isFaceUp()) {
+            c.setFaceUp(false);
+        } else {
+            c.setFaceUp(true);
+        }
         this.updateHandValue();
     }
 
@@ -60,18 +61,19 @@ public class Player extends ArrayList<Card> {
 
     // look for and swap the value of the first Ace found with a value of 11
     private boolean lookForAnAce() {
-        boolean theThing = false;
+        boolean found = false;
         for (Card c: this) {
-            if (c.isFaceUp() && c.getRank() == Card.ACE && c.getValue() == Card.ELEVEN_VAL) {
-                c.swapAceValue();
-                theThing = true;
+            if (c.isFaceUp() && c.getRank().equals(Card.ACE) && c.getValue() == Card.ELEVEN_VAL) {
+                c.setValue(Card.ONE_VAL);
+                found = true;
                 break;
             }
         }
-        return theThing;
+        return found;
     }
 
     // to string method
+    @Override
     public String toString() {
         String toString = "";
         for (Card c : this) {
@@ -79,22 +81,5 @@ public class Player extends ArrayList<Card> {
         }
         toString += "handValue: " + this.handValue;
         return toString;
-    }
-
-    // main method
-    public static void main(String[] args) {
-        Player hand = new Player();
-
-        System.out.println("Cards not face up:");
-        for (int i = 0; i < 3; i++) {
-            hand.addCard(new Card(), false);
-        }
-        System.out.println(hand);
-
-        System.out.println("\nCards face up:");
-        for (int i = 0; i < hand.size(); i++) {
-            hand.flip(i);
-        }
-        System.out.println(hand);
     }
 }

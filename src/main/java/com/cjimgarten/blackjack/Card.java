@@ -78,6 +78,11 @@ public class Card {
     }
 
     public void setValue(int value) {
+
+        // only set the value if the card is an Ace
+        if (!this.rank.equals(ACE)) {
+            return;
+        }
         this.value = value;
     }
 
@@ -87,31 +92,6 @@ public class Card {
 
     public void setFaceUp(boolean faceUp) {
         this.faceUp = faceUp;
-    }
-
-    // flip the card
-    public  void flip() {
-        if (this.faceUp) {
-            this.faceUp = false;
-        } else {
-            this.faceUp = true;
-        }
-    }
-
-    // swap the value of an Ace
-    public void swapAceValue() {
-
-        // ensure the card is an Ace
-        if (!this.rank.equals(ACE)) {
-            return;
-        }
-
-        // swap value
-        if (this.value == ONE_VAL) {
-            this.value = ELEVEN_VAL;
-        } else {
-            this.value = ONE_VAL;
-        }
     }
 
     // to string method

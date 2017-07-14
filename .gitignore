@@ -40,3 +40,5 @@ hs_err_pid*
 
 ### Additional files
 workspace.xml
+.idea
+*.iml

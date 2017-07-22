@@ -65,6 +65,7 @@ public class Deck extends ArrayList<Card> {
     }
 
     // to string method
+    @Override
     public String toString() {
         String toString = "";
         for (Card c : this) {

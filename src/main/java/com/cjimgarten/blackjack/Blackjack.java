@@ -144,7 +144,7 @@ public class Blackjack {
     public void dealerHits() {
 
         // dealer hits until 17 or higher
-        this.dealerHand.flip(1);
+        this.dealerHand.flipCard(1);
         while (this.dealerHand.getHandValue() < 17) {
             this.dealerHand.addCard(this.deck.getTopCard(), true);
         }
@@ -186,9 +186,4 @@ public class Blackjack {
         }
     }
 
-    // main method
-    public static void main(String[] args) {
-        Blackjack game = new Blackjack();
-        game.start();
-    }
 }

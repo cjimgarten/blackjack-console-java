@@ -100,4 +100,24 @@ public class Card {
         return "rank: " + this.rank + ", suit: " + this.suit + ", value: " + this.value + ", " +
                 "faceUp: " + this.faceUp;
     }
+
+    // equals method
+    @Override
+    public boolean equals(Object obj) {
+        if ( !(obj instanceof Card) ) {
+            return false;
+        }
+
+        Card card = (Card) obj;
+
+        if (this.rank.equals(card.rank) &&
+                this.suit.equals(card.suit) &&
+                this.value == card.value &&
+                this.faceUp == card.faceUp) {
+            return true;
+        }
+
+        return false;
+    }
+
 }

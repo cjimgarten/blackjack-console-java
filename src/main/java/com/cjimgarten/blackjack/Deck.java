@@ -2,7 +2,6 @@ package com.cjimgarten.blackjack;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Scanner;
 
 /**
  * Created by chris on 6/21/17.
@@ -74,18 +73,4 @@ public class Deck extends ArrayList<Card> {
         return toString;
     }
 
-    // main method
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        System.out.print("Shuffle first? (y/n) ");
-        String shuffle = in.next();
-
-        Deck myDeck = new Deck();
-        if (shuffle.equals("y") || shuffle.equals("yes")) {
-            myDeck.shuffle();
-        }
-
-        System.out.println("\nDeck:\n" + myDeck);
-        System.out.println("Top card:\n" + myDeck.getTopCard());
-    }
 }

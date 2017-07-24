@@ -8,11 +8,14 @@ import java.util.Scanner;
 public class Blackjack {
 
     /**
-     * class for a blackjack game
+     * class for a game of blackjack
      */
 
     // constants
     public static final int MAGIC_NUMBER = 21;
+    public static final String USER_WINS = "You Win :)";
+    public static final String DEALER_WINS = "Dealer Wins :(";
+    public static final String TIE = "Tie :/";
 
     // fields
     private Deck deck;
@@ -20,7 +23,7 @@ public class Blackjack {
     private Player dealerHand;
 
     // scanner for user input
-    private Scanner in = new Scanner(System.in);
+    private static Scanner in = new Scanner(System.in);
 
     // constructor
     public Blackjack() {
@@ -31,6 +34,7 @@ public class Blackjack {
 
     // start the game
     public void start() {
+
         System.out.println("Welcome to Blackjack");
 
         // prompt the user if they're ready to play
@@ -43,24 +47,41 @@ public class Blackjack {
         this.deck.shuffle();
         boolean playAgain;
 
-        // play the game
+        // iteration of games
         do {
 
-            // iteration of a single game
-
-            System.out.println("Let's play\n");
+            this.checkDeckSize();
+            System.out.println("\nLet's play\n");
             this.clearAndDeal();
             this.displayHands();
-            this.userHits();
-            this.dealerHits();
+
+            // user plays their hand
+            boolean userOverTwentyOne = this.userHits();
+            if (userOverTwentyOne) {
+
+                // user loses
+                System.out.println("\n" + DEALER_WINS + "\n");
+                playAgain = yesOrNo("Play again?");
+                continue;
+            }
+
+            // dealer plays their hand
+            boolean dealerOverTwentyOne = this.dealerHits();
+            if (dealerOverTwentyOne) {
+
+                //  user wins
+                System.out.println("\n" + USER_WINS + "\n");
+                playAgain = yesOrNo("Play again?");
+                continue;
+            }
 
             int winner = this.evaluateHands();
             if (winner == 1) {
-                System.out.println("\nYou win\n");
+                System.out.println("\n" + USER_WINS + "\n");
             } else if (winner == 2) {
-                System.out.println("\nDealer wins\n");
+                System.out.println("\n" + DEALER_WINS + "\n");
             } else {
-                System.out.println("\nTie\n");
+                System.out.println("\n" + TIE + "\n");
             }
 
             playAgain = yesOrNo("Play again?");
@@ -82,6 +103,23 @@ public class Blackjack {
         return readyBool;
     }
 
+    // check the number of cards in the deck
+    public void checkDeckSize() {
+        if (this.deck.size() < 15) {
+            this.deck.clear();
+            this.deck = new Deck();
+
+            System.out.print("\n");
+            String shuffling = "Shuffling...";
+            for (char c : shuffling.toCharArray()) {
+                System.out.print(c);
+                this.sleep(250);
+            }
+            System.out.print("\n");
+            this.deck.shuffle();
+        }
+    }
+
     // clear hands and deal a new hand
     public void clearAndDeal() {
         this.userHand.clear();
@@ -100,12 +138,14 @@ public class Blackjack {
         this.sleep(500);
         System.out.println("Your hand:");
         for (Card c : this.userHand) {
+            this.sleep(100);
             if (c.isFaceUp()) {
                 System.out.println(c.getRank() + " of " + c.getSuit() + "s: " + c.getValue());
             } else {
                 System.out.println("_");
             }
         }
+        this.sleep(100);
         System.out.println("Value: " + this.userHand.getHandValue());
 
         // line break
@@ -115,40 +155,60 @@ public class Blackjack {
         this.sleep(500);
         System.out.println("Dealer hand:");
         for (Card c : this.dealerHand) {
+            this.sleep(100);
             if (c.isFaceUp()) {
                 System.out.println(c.getRank() + " of " + c.getSuit() + "s: " + c.getValue());
             } else {
                 System.out.println("_");
             }
         }
+        this.sleep(100);
         System.out.println("Value: " + this.dealerHand.getHandValue());
     }
 
     // user plays their hand
-    public void userHits() {
+    public boolean userHits() {
+
+        boolean overTwentyOne = false;
         while (true) {
             System.out.print("\n");
             this.sleep(500);
             boolean hit = yesOrNo("Hit?");
+            System.out.print("\n");
             if (!hit) {
                 break;
             }
 
-            System.out.print("\n");
             this.userHand.addCard(this.deck.getTopCard(), true);
             this.displayHands();
+
+            // check if user is over 21
+            if (this.userHand.getHandValue() > MAGIC_NUMBER) {
+                overTwentyOne = true;
+                break;
+            }
         }
+
+        return overTwentyOne;
     }
 
     // dealer plays their hand
-    public void dealerHits() {
+    public boolean dealerHits() {
 
         // dealer hits until 17 or higher
+        boolean overTwentyOne = false;
         this.dealerHand.flipCard(1);
         while (this.dealerHand.getHandValue() < 17) {
             this.dealerHand.addCard(this.deck.getTopCard(), true);
         }
         this.displayHands();
+
+        // check if dealer is over 21
+        if (this.dealerHand.getHandValue() > MAGIC_NUMBER) {
+            overTwentyOne = true;
+        }
+
+        return overTwentyOne;
     }
 
     // return 1 if the user wins, 2 if the dealer wins, or 3 if they tie

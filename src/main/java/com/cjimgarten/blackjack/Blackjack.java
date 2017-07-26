@@ -19,7 +19,7 @@ public class Blackjack {
 
     // fields
     private Deck deck;
-    private Player userHand;
+    private User userHand;
     private Player dealerHand;
 
     // scanner for user input
@@ -28,7 +28,7 @@ public class Blackjack {
     // constructor
     public Blackjack() {
         this.deck = new Deck();
-        this.userHand = new Player();
+        this.userHand = new User();
         this.dealerHand = new Player();
     }
 

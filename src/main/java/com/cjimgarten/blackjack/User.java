@@ -31,7 +31,7 @@ public class User extends Player {
     }
 
     public void withdraw(double amount) {
-        this.bank += amount;
+        this.bank -= amount;
     }
 
 }

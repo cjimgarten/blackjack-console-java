@@ -3,13 +3,10 @@ package com.cjimgarten.blackjack;
 import java.util.ArrayList;
 
 /**
- * Created by chris on 6/25/17.
+ * Player class
+ * class for a players hand
  */
 public class Player extends ArrayList<Card> {
-
-    /**
-     * class for a players hand
-     */
 
     // fields
     private int handValue;

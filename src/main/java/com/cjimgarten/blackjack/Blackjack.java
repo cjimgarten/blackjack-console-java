@@ -3,19 +3,17 @@ package com.cjimgarten.blackjack;
 import java.util.Scanner;
 
 /**
- * Created by chris on 6/25/17.
+ * Blackjack class
+ * class for a game of blackjack
  */
 public class Blackjack {
-
-    /**
-     * class for a game of blackjack
-     */
 
     // constants
     public static final int MAGIC_NUMBER = 21;
     public static final String USER_WINS = "You Win :)";
     public static final String DEALER_WINS = "Dealer Wins :(";
     public static final String TIE = "Tie :/";
+    public static final double MIN_BET = 10.00;
 
     // fields
     private Deck deck;
@@ -51,7 +49,20 @@ public class Blackjack {
         do {
 
             this.checkDeckSize();
+
+            // TODO check that the user has money
+            double currentBank = this.userHand.getBank();
+            if (currentBank < MIN_BET) {
+                System.out.println("\n$" + currentBank + " is not enough money to play");
+                System.out.println("Bye");
+                System.exit(0);
+            }
+
             System.out.println("\nLet's play\n");
+
+            // TODO place a bet
+            double bet = this.placeBet();
+
             this.clearAndDeal();
             this.displayHands();
 
@@ -61,6 +72,7 @@ public class Blackjack {
 
                 // user loses
                 System.out.println("\n" + DEALER_WINS + "\n");
+                this.userHand.withdraw(bet);
                 playAgain = yesOrNo("Play again?");
                 continue;
             }
@@ -71,6 +83,7 @@ public class Blackjack {
 
                 //  user wins
                 System.out.println("\n" + USER_WINS + "\n");
+                this.userHand.deposit(bet);
                 playAgain = yesOrNo("Play again?");
                 continue;
             }
@@ -78,8 +91,10 @@ public class Blackjack {
             int winner = this.evaluateHands();
             if (winner == 1) {
                 System.out.println("\n" + USER_WINS + "\n");
+                this.userHand.deposit(bet);
             } else if (winner == 2) {
                 System.out.println("\n" + DEALER_WINS + "\n");
+                this.userHand.withdraw(bet);
             } else {
                 System.out.println("\n" + TIE + "\n");
             }
@@ -120,6 +135,21 @@ public class Blackjack {
         }
     }
 
+    // TODO allow the user to place a bet
+    public double placeBet() {
+        double bet;
+        double currentBank = this.userHand.getBank();
+        System.out.println("You currently have $" + currentBank);
+        System.out.println("How much would you like to bet?");
+        bet = in.nextDouble();
+        while (bet < MIN_BET || bet > currentBank) {
+            System.out.println("\nAgain...");
+            bet = in.nextDouble();
+        }
+
+        return bet;
+    }
+
     // clear hands and deal a new hand
     public void clearAndDeal() {
         this.userHand.clear();
@@ -136,7 +166,7 @@ public class Blackjack {
 
         // display the users hand
         this.sleep(500);
-        System.out.println("Your hand:");
+        System.out.println("\nYour hand:");
         for (Card c : this.userHand) {
             this.sleep(100);
             if (c.isFaceUp()) {
@@ -148,12 +178,9 @@ public class Blackjack {
         this.sleep(100);
         System.out.println("Value: " + this.userHand.getHandValue());
 
-        // line break
-        System.out.print("\n");
-
         // display the dealers hand
         this.sleep(500);
-        System.out.println("Dealer hand:");
+        System.out.println("\nDealer hand:");
         for (Card c : this.dealerHand) {
             this.sleep(100);
             if (c.isFaceUp()) {
@@ -164,6 +191,7 @@ public class Blackjack {
         }
         this.sleep(100);
         System.out.println("Value: " + this.dealerHand.getHandValue());
+        this.sleep(500);
     }
 
     // user plays their hand
@@ -172,9 +200,7 @@ public class Blackjack {
         boolean overTwentyOne = false;
         while (true) {
             System.out.print("\n");
-            this.sleep(500);
             boolean hit = yesOrNo("Hit?");
-            System.out.print("\n");
             if (!hit) {
                 break;
             }

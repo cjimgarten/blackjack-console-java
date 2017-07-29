@@ -1,7 +1,8 @@
 package com.cjimgarten.blackjack;
 
 /**
- * Created by chris on 7/18/17.
+ * Main class
+ * application entry point
  */
 public class Main {
 

@@ -1,13 +1,10 @@
 package com.cjimgarten.blackjack;
 
 /**
- * Created by chris on 7/25/17.
+ * User class
+ * class for a users hand
  */
 public class User extends Player {
-
-    /**
-     * class for a users hand
-     */
 
     // fields
     private double bank;
@@ -18,7 +15,7 @@ public class User extends Player {
     }
 
     public User(double bank) {
-        this.bank = bank;
+        this.bank = roundToTwoDecimals(bank);
     }
 
     // methods
@@ -28,10 +25,18 @@ public class User extends Player {
 
     public void deposit(double amount) {
         this.bank += amount;
+        this.bank = roundToTwoDecimals(this.bank);
     }
 
     public void withdraw(double amount) {
         this.bank -= amount;
+        this.bank = roundToTwoDecimals(this.bank);
+    }
+
+    private static double roundToTwoDecimals(double amount) {
+        amount *= 100;
+        amount = Math.round(amount);
+        return amount / 100;
     }
 
 }

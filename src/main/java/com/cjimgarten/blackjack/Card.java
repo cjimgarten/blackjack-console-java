@@ -1,13 +1,10 @@
 package com.cjimgarten.blackjack;
 
 /**
- * Created by chris on 6/21/17.
+ * Card class
+ * class for a playing card
  */
 public class Card {
-
-    /**
-     * class for a playing card
-     */
 
     // rank constants
     public static final String ACE = "Ace";

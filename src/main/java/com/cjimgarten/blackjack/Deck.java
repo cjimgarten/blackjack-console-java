@@ -4,13 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Created by chris on 6/21/17.
+ * Deck class
+ * class for a deck of cards
  */
 public class Deck extends ArrayList<Card> {
-
-    /**
-     * class for a deck of cards
-     */
 
     // constants
     public static final int START_SIZE = 52;

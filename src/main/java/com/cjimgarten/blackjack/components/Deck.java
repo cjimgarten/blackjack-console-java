@@ -1,4 +1,4 @@
-package com.cjimgarten.blackjack;
+package com.cjimgarten.blackjack.components;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -70,5 +70,4 @@ public class Deck extends ArrayList<Card> {
         }
         return toString;
     }
-
 }

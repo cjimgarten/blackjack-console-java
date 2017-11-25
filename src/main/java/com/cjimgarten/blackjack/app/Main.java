@@ -1,4 +1,6 @@
-package com.cjimgarten.blackjack;
+package com.cjimgarten.blackjack.app;
+
+import com.cjimgarten.blackjack.components.Blackjack;
 
 /**
  * Main class
@@ -10,5 +12,4 @@ public class Main {
         Blackjack game = new Blackjack();
         game.start();
     }
-
 }

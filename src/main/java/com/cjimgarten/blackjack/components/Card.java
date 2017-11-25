@@ -1,4 +1,4 @@
-package com.cjimgarten.blackjack;
+package com.cjimgarten.blackjack.components;
 
 /**
  * Card class
@@ -116,5 +116,4 @@ public class Card {
 
         return false;
     }
-
 }

@@ -1,4 +1,4 @@
-package com.cjimgarten.blackjack;
+package com.cjimgarten.blackjack.components;
 
 import java.util.Scanner;
 
@@ -271,5 +271,4 @@ public class Blackjack {
             e.printStackTrace();
         }
     }
-
 }

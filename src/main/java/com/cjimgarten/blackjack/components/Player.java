@@ -1,4 +1,4 @@
-package com.cjimgarten.blackjack;
+package com.cjimgarten.blackjack.components;
 
 import java.util.ArrayList;
 

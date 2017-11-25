@@ -1,4 +1,4 @@
-package com.cjimgarten.blackjack;
+package com.cjimgarten.blackjack.components;
 
 /**
  * User class
@@ -38,5 +38,4 @@ public class User extends Player {
         amount = Math.round(amount);
         return amount / 100;
     }
-
 }

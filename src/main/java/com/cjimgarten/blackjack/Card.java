@@ -1,8 +1,8 @@
-package com.cjimgarten.blackjack.components;
+package com.cjimgarten.blackjack;
 
 /**
- * Card class
- * class for a playing card
+ * Card.java
+ * a playing card
  */
 public class Card {
 

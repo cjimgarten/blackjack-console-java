@@ -1,11 +1,11 @@
-package com.cjimgarten.blackjack.components;
+package com.cjimgarten.blackjack;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Deck class
- * class for a deck of cards
+ * Deck.java
+ * a deck of cards
  */
 public class Deck extends ArrayList<Card> {
 

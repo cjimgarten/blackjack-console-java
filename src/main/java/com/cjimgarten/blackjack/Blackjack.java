@@ -1,10 +1,10 @@
-package com.cjimgarten.blackjack.components;
+package com.cjimgarten.blackjack;
 
 import java.util.Scanner;
 
 /**
- * Blackjack class
- * class for a game of blackjack
+ * Blackjack.java
+ * a game of blackjack
  */
 public class Blackjack {
 
@@ -17,8 +17,8 @@ public class Blackjack {
 
     // fields
     private Deck deck;
-    private User userHand;
-    private Player dealerHand;
+    private UserCards userCards;
+    private PlayerCards dealerCards;
 
     // scanner for user input
     private static Scanner in = new Scanner(System.in);
@@ -26,8 +26,8 @@ public class Blackjack {
     // constructor
     public Blackjack() {
         this.deck = new Deck();
-        this.userHand = new User();
-        this.dealerHand = new Player();
+        this.userCards = new UserCards();
+        this.dealerCards = new PlayerCards();
     }
 
     // start the game
@@ -51,7 +51,7 @@ public class Blackjack {
             this.checkDeckSize();
 
             // TODO check that the user has money
-            double currentBank = this.userHand.getBank();
+            double currentBank = this.userCards.getBank();
             if (currentBank < MIN_BET) {
                 System.out.println("\n$" + currentBank + " is not enough money to play");
                 System.out.println("Bye");
@@ -72,7 +72,7 @@ public class Blackjack {
 
                 // user loses
                 System.out.println("\n" + DEALER_WINS + "\n");
-                this.userHand.withdraw(bet);
+                this.userCards.withdraw(bet);
                 playAgain = yesOrNo("Play again?");
                 continue;
             }
@@ -83,7 +83,7 @@ public class Blackjack {
 
                 //  user wins
                 System.out.println("\n" + USER_WINS + "\n");
-                this.userHand.deposit(bet);
+                this.userCards.deposit(bet);
                 playAgain = yesOrNo("Play again?");
                 continue;
             }
@@ -91,10 +91,10 @@ public class Blackjack {
             int winner = this.evaluateHands();
             if (winner == 1) {
                 System.out.println("\n" + USER_WINS + "\n");
-                this.userHand.deposit(bet);
+                this.userCards.deposit(bet);
             } else if (winner == 2) {
                 System.out.println("\n" + DEALER_WINS + "\n");
-                this.userHand.withdraw(bet);
+                this.userCards.withdraw(bet);
             } else {
                 System.out.println("\n" + TIE + "\n");
             }
@@ -138,7 +138,7 @@ public class Blackjack {
     // TODO allow the user to place a bet
     public double placeBet() {
         double bet;
-        double currentBank = this.userHand.getBank();
+        double currentBank = this.userCards.getBank();
         System.out.println("You currently have $" + currentBank);
         System.out.println("How much would you like to bet?");
         bet = in.nextDouble();
@@ -152,13 +152,13 @@ public class Blackjack {
 
     // clear hands and deal a new hand
     public void clearAndDeal() {
-        this.userHand.clear();
-        this.userHand.addCard(this.deck.getTopCard(), true);
-        this.userHand.addCard(this.deck.getTopCard(), true);
+        this.userCards.clear();
+        this.userCards.addCard(this.deck.getTopCard(), true);
+        this.userCards.addCard(this.deck.getTopCard(), true);
 
-        this.dealerHand.clear();
-        this.dealerHand.addCard(this.deck.getTopCard(), true);
-        this.dealerHand.addCard(this.deck.getTopCard(), false);
+        this.dealerCards.clear();
+        this.dealerCards.addCard(this.deck.getTopCard(), true);
+        this.dealerCards.addCard(this.deck.getTopCard(), false);
     }
 
     // display hands
@@ -167,7 +167,7 @@ public class Blackjack {
         // display the users hand
         this.sleep(500);
         System.out.println("\nYour hand:");
-        for (Card c : this.userHand) {
+        for (Card c : this.userCards) {
             this.sleep(100);
             if (c.isFaceUp()) {
                 System.out.println(c.getRank() + " of " + c.getSuit() + "s: " + c.getValue());
@@ -176,12 +176,12 @@ public class Blackjack {
             }
         }
         this.sleep(100);
-        System.out.println("Value: " + this.userHand.getHandValue());
+        System.out.println("Value: " + this.userCards.getHandValue());
 
         // display the dealers hand
         this.sleep(500);
         System.out.println("\nDealer hand:");
-        for (Card c : this.dealerHand) {
+        for (Card c : this.dealerCards) {
             this.sleep(100);
             if (c.isFaceUp()) {
                 System.out.println(c.getRank() + " of " + c.getSuit() + "s: " + c.getValue());
@@ -190,7 +190,7 @@ public class Blackjack {
             }
         }
         this.sleep(100);
-        System.out.println("Value: " + this.dealerHand.getHandValue());
+        System.out.println("Value: " + this.dealerCards.getHandValue());
         this.sleep(500);
     }
 
@@ -205,11 +205,11 @@ public class Blackjack {
                 break;
             }
 
-            this.userHand.addCard(this.deck.getTopCard(), true);
+            this.userCards.addCard(this.deck.getTopCard(), true);
             this.displayHands();
 
             // check if user is over 21
-            if (this.userHand.getHandValue() > MAGIC_NUMBER) {
+            if (this.userCards.getHandValue() > MAGIC_NUMBER) {
                 overTwentyOne = true;
                 break;
             }
@@ -223,14 +223,14 @@ public class Blackjack {
 
         // dealer hits until 17 or higher
         boolean overTwentyOne = false;
-        this.dealerHand.flipCard(1);
-        while (this.dealerHand.getHandValue() < 17) {
-            this.dealerHand.addCard(this.deck.getTopCard(), true);
+        this.dealerCards.flipCard(1);
+        while (this.dealerCards.getHandValue() < 17) {
+            this.dealerCards.addCard(this.deck.getTopCard(), true);
         }
         this.displayHands();
 
         // check if dealer is over 21
-        if (this.dealerHand.getHandValue() > MAGIC_NUMBER) {
+        if (this.dealerCards.getHandValue() > MAGIC_NUMBER) {
             overTwentyOne = true;
         }
 
@@ -240,9 +240,9 @@ public class Blackjack {
     // return 1 if the user wins, 2 if the dealer wins, or 3 if they tie
     public int evaluateHands() {
         int winner;
-        if (this.userHand.getHandValue() > this.dealerHand.getHandValue()) {
+        if (this.userCards.getHandValue() > this.dealerCards.getHandValue()) {
             winner = 1; // user wins
-        } else if (this.userHand.getHandValue() < this.dealerHand.getHandValue()) {
+        } else if (this.userCards.getHandValue() < this.dealerCards.getHandValue()) {
             winner = 2; // dealer wins
         } else {
             winner = 3; // tie

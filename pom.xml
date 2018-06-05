@@ -33,7 +33,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.cjimgarten.blackjack.Main</mainClass>
+                            <mainClass>com.cjimgarten.blackjack.App</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

@@ -1,20 +1,20 @@
-package com.cjimgarten.blackjack.components;
+package com.cjimgarten.blackjack;
 
 /**
- * User class
- * class for a users hand
+ * UserCards.java
+ * a users cards
  */
-public class User extends Player {
+public class UserCards extends PlayerCards {
 
     // fields
     private double bank;
 
     // constructor
-    public User() {
+    public UserCards() {
         this(1000.00);
     }
 
-    public User(double bank) {
+    public UserCards(double bank) {
         this.bank = roundToTwoDecimals(bank);
     }
 

@@ -1,18 +1,18 @@
-package com.cjimgarten.blackjack.components;
+package com.cjimgarten.blackjack;
 
 import java.util.ArrayList;
 
 /**
- * Player class
- * class for a players hand
+ * PlayerCards.java
+ * a players cards
  */
-public class Player extends ArrayList<Card> {
+public class PlayerCards extends ArrayList<Card> {
 
     // fields
     private int handValue;
 
     // constructor
-    public Player() {
+    public PlayerCards() {
         this.handValue = 0;
     }
 

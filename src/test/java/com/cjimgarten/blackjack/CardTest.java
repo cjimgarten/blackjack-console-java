@@ -1,4 +1,4 @@
-package com.cjimgarten.blackjack.components;
+package com.cjimgarten.blackjack;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -6,7 +6,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Created by chris on 7/13/17.
+ * CardTest.java
+ * unit tests for Card class
  */
 public class CardTest {
 

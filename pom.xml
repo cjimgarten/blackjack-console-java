@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.cjimgarten.blackjack</groupId>
-    <artifactId>blackjack-console-java</artifactId>
+    <artifactId>terminal-blackjack</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>blackjack-console-java</name>
-    <description>Blackjack played via the console</description>
+    <name>terminal-blackjack</name>
+    <description>blackjack played via the terminal</description>
 
     <dependencies>
         <dependency>

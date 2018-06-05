@@ -1,2 +1,2 @@
 # terminal-blackjack
-blackjack played via the terminal 
+Blackjack played via the terminal 

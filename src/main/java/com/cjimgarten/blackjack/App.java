@@ -7,7 +7,7 @@ package com.cjimgarten.blackjack;
 public class App {
 
     public static void main(String[] args) {
-        Blackjack game = new Blackjack();
-        game.start();
+        Blackjack blackjack = new Blackjack();
+        blackjack.start();
     }
 }

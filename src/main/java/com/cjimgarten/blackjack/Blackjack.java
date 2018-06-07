@@ -10,9 +10,11 @@ public class Blackjack {
 
     // constants
     public static final int MAGIC_NUMBER = 21;
-    public static final String USER_WINS = "You Win :)";
-    public static final String DEALER_WINS = "Dealer Wins :(";
+    public static final String USER_WINS = "You win :)";
+    public static final String DEALER_WINS = "Dealer wins :(";
     public static final String TIE = "Tie :/";
+    public static final String FAREWELL = "Bye";
+    public static final String AGAIN = "Play again?";
     public static final double MIN_BET = 10.00;
 
     // fields
@@ -38,7 +40,7 @@ public class Blackjack {
         // prompt the user if they're ready to play
         boolean ready = this.yesOrNo("Ready to play?");
         if (!ready) {
-            System.out.println("Bye");
+            System.out.println(FAREWELL);
             System.exit(0);
         }
 
@@ -54,7 +56,7 @@ public class Blackjack {
             double currentBank = this.userCards.getBank();
             if (currentBank < MIN_BET) {
                 System.out.println("\n$" + currentBank + " is not enough money to play");
-                System.out.println("Bye");
+                System.out.println(FAREWELL);
                 System.exit(0);
             }
 
@@ -73,7 +75,7 @@ public class Blackjack {
                 // user loses
                 System.out.println("\n" + DEALER_WINS + "\n");
                 this.userCards.withdraw(bet);
-                playAgain = yesOrNo("Play again?");
+                playAgain = yesOrNo(AGAIN);
                 continue;
             }
 
@@ -84,7 +86,7 @@ public class Blackjack {
                 //  user wins
                 System.out.println("\n" + USER_WINS + "\n");
                 this.userCards.deposit(bet);
-                playAgain = yesOrNo("Play again?");
+                playAgain = yesOrNo(AGAIN);
                 continue;
             }
 
@@ -99,12 +101,12 @@ public class Blackjack {
                 System.out.println("\n" + TIE + "\n");
             }
 
-            playAgain = yesOrNo("Play again?");
+            playAgain = yesOrNo(AGAIN);
 
         } while (playAgain);
 
         // farewell user
-        System.out.println("Bye");
+        System.out.println(FAREWELL);
     }
 
     // if 'y' or 'yes' return true, else return false
